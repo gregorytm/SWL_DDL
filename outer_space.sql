@@ -17,9 +17,10 @@ CREATE TABLE galaxy (
   galaxy_name TEXT 
 );
 
-CREATE TABLE moons (
+CREATE TABLE moons_index (
   id SERIAL PRIMARY KEY,
-  moons_list TEXT[]
+  moon_name TEXT,
+  system_ID INTEGER
 );
 
 CREATE TABLE planets (
@@ -28,7 +29,7 @@ CREATE TABLE planets (
   orbital_period_in_years FLOAT NOT NULL,
   orbits_around INTEGER REFERENCES orbits,
   galaxy INTEGER REFERENCES galaxy,
-  moons INTEGER REFERENCES moons
+  moons INTEGER REFERENCES moons_index
 );
 
 INSERT INTO orbits (orbits_name)
@@ -41,14 +42,29 @@ INSERT INTO galaxy (galaxy_name)
 VALUES
 ('Milky Way');
 
-INSERT INTO moons (moons_list)
+INSERT INTO moons_index (moon_name, system_ID)
 VALUES
-('{"The Moon"}'),
-('{"Phobos", "Deimos"}'),
-('{}'),
-('{"Naiad", "Thalassa", "Despina", "Galatea", "Larissa", "S/2004 N 1", "Proteus", "Triton", "Nereid", "Halimede", "Sao", "Laomedeia", "Psamathe", "Neso"}'),
-('{}'),
-('{}');
+('The Moon',1),
+('Phobos',2),
+('Deimos',2),
+(NULL, 3),
+('Naiad',4),
+('Thalassa',4),
+('Despina',4),
+('Galatea',4),
+('Larissa',4),
+('s/2004 n 1',4),
+('Proteus',4),
+('Triton',4),
+('Nereid',4),
+('Halimede',4),
+('Sao',4),
+('Laomedeia',4),
+('Psamathe',4),
+('Neso',4),
+(NULL,5 ),
+(NULL,6);
+
 
 INSERT INTO planets (name, orbital_period_in_years, orbits_around, galaxy, moons)
 VALUES
